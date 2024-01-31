@@ -1,5 +1,3 @@
-
-
 const apiUrl = 'https://dashboard.elering.ee/api';
 
 export const getPriceData = async () => {
@@ -15,4 +13,12 @@ export const getPriceData = async () => {
 
     return await response.json();
 
+};
+
+
+export const getCurrentPrice = async () => {
+    const country = 'EE';
+
+    const response = await fetch(`${apiUrl}/nps/price/${country}/current`);
+    return await response.json();
 };
