@@ -1,27 +1,39 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { convertToInputForm, convertToRequestFormat } from '../utils/dates';
 
-function SearchForm() {
 
+function SearchForm({ handleClose, from, until, setFrom, setUntil }) {
     const handleSubmit = (event) => {
         event.preventDefault();
-
 
         const from = event.target.from.value;
         const until = event.target.until.value;
 
-        console.log(from, until);
+        setFrom(convertToRequestFormat(from));
+        setUntil(convertToRequestFormat(until));
+
+        handleClose();
+
     };
 
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
                 <Form.Label>From</Form.Label>
-                <Form.Control type="date" placeholder="dateFrom" name='from' />
+                <Form.Control
+                    type="datetime-local"
+                    placeholder="date from"
+                    name='from'
+                    defaultValue={convertToInputForm(from)} />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Until</Form.Label>
-                <Form.Control type="date" placeholder="dateUntil" name='until' />
+                <Form.Control
+                    type="datetime-local"
+                    placeholder="date until"
+                    name='until'
+                    defaultValue={convertToInputForm(until)} />
             </Form.Group>
             <Button variant='primary' className='w-100' type='submit'>
                 Search
