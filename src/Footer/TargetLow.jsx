@@ -2,8 +2,11 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Intervals from "./Intervals";
+import CountDownComp from "./CountDownComp";
+
 
 function TargetLow(props) {
+
     return (<>
         <Row>
             <Col>TargetLow</Col>
@@ -18,6 +21,7 @@ function TargetLow(props) {
 
         <Row>
             <Col>
+                <CountDownComp />
             </Col>
         </Row>
     </>);
