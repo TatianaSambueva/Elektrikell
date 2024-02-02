@@ -2,8 +2,11 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Intervals from "./Intervals";
+import Countdown from 'react-countdown';
+import { addHourtoCurrentTSMl } from "../utils/dates";
 
 function TargetLow(props) {
+    const countDownDate = addHourtoCurrentTSMl();
     return (<>
         <Row>
             <Col>TargetLow</Col>
@@ -18,6 +21,11 @@ function TargetLow(props) {
 
         <Row>
             <Col>
+                <Countdown date={countDownDate}>
+                    <div>
+                        The time is now
+                    </div>
+                </Countdown>
             </Col>
         </Row>
     </>);
