@@ -11,6 +11,7 @@ import {
     Dot,
     ResponsiveContainer,
     ReferenceArea,
+    ReferenceLine
 } from "recharts";
 import { getPriceData } from "../services/apiService";
 import { chartDataConvertor } from "../utils";
@@ -22,6 +23,7 @@ function Body({ from, until, activeHour }) {
     const [priceData, setPriceData] = useState([]);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
+    const [averagePrice, setAveragePrice] = useState(0);
 
     const renderDot = (line) => {
         const {
@@ -50,7 +52,12 @@ function Body({ from, until, activeHour }) {
             setX1(lowPriceIntervals[0].index);
             setX2(lodash.last(lowPriceIntervals).index);
         }
+
+        const priceSum = priceData.reduce((acc, { price }) => acc + parseFloat(price), 0);
+        const averagePrice = priceSum / priceData.length;
+        setAveragePrice(averagePrice);
     }, [priceData, activeHour]);
+
 
     return (
         <Row>
@@ -68,6 +75,7 @@ function Body({ from, until, activeHour }) {
                             dot={renderDot}
                         />
                         <ReferenceArea x1={x1} x2={x2} stroke="red" strokeOpacity={0.3} />
+                        <ReferenceLine y={averagePrice} label="Average price" stroke="red" strokeDasharray="3 3" />
                     </LineChart>
                 </ResponsiveContainer>
             </Col>
