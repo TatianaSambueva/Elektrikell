@@ -1,5 +1,5 @@
 import { currentTimeStamp } from "./dates";
-import lodash from "lodash";
+// import lodash from "lodash";
 
 export const removePast = (data) => {
     return data.filter(({ timestamp }) => {
