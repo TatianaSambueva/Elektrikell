@@ -1,0 +1,1 @@
+export const ERROR_MESSAGE = 'Could bot fetch data from: /nps/price';
