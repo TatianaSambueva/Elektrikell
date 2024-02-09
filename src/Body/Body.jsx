@@ -21,10 +21,12 @@ import { getAveragePrice } from "../utils/maths";
 import lodash from "lodash";
 import { ERROR_MESSAGE } from "./constants";
 
+
 function Body({ from, until, activeHour, setErrorMessage, setBestUntil }) {
     const [priceData, setPriceData] = useState([]);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
+
 
 
     const averagePrice = useMemo(() => {
@@ -67,6 +69,7 @@ function Body({ from, until, activeHour, setErrorMessage, setBestUntil }) {
     return (
         <Row>
             <Col>
+
                 <ResponsiveContainer width="100%" height={400}>
                     <LineChart data={priceData}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -87,6 +90,7 @@ function Body({ from, until, activeHour, setErrorMessage, setBestUntil }) {
                         />
                     </LineChart>
                 </ResponsiveContainer>
+
             </Col>
         </Row>
     );

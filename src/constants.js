@@ -5,3 +5,5 @@ export const VAT = {
 export const COUNTRY_CODES = {
     ee: 'estonia',
 };
+
+export const ERROR_MESSAGE = 'Could bot fetch data from: /nps/price';
