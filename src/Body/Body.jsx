@@ -21,7 +21,7 @@ import { getAveragePrice } from "../utils/maths";
 import lodash from "lodash";
 import { ERROR_MESSAGE } from "./constants";
 
-function Body({ from, until, activeHour, setErrorMessage, setBestUntil }) {
+function Body({ from, until, activeHour, setErrorMessage, setBestUntil, setIsLoading }) {
     const [priceData, setPriceData] = useState([]);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
@@ -51,8 +51,9 @@ function Body({ from, until, activeHour, setErrorMessage, setBestUntil }) {
 
             setPriceData(priceData);
         })
-            .catch(error => setErrorMessage(ERROR_MESSAGE));
-    }, [from, until, setErrorMessage]);
+            .catch(error => setErrorMessage(ERROR_MESSAGE))
+            .finally(() => setIsLoading(false));
+    }, [from, until, setErrorMessage, setIsLoading]);
 
     useEffect(() => {
         const lowPriceIntervals = getLowPriceInterval(priceData, activeHour);
