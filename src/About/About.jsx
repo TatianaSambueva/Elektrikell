@@ -7,12 +7,13 @@ function About() {
     const params = useParams();
     const navigate = useNavigate();
 
+
+    console.log('params', params);
+
     useEffect(() => {
-        if (params.id === '999') navigate("/");
-    }, [params, navigate])
+        if (params.id === "999") navigate("/");
+    }, [params, navigate]);
 
-
-    console.log(params);
     return <>About component</>;
 }
 
