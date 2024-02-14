@@ -6,6 +6,7 @@ import { setFrom, setUntil } from '../services/stateService';
 
 
 function SearchForm({ handleClose }) {
+    console.log('SearchForm');
 
     const dispatch = useDispatch();
     const from = useSelector((state) => state.date.from);

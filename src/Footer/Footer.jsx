@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 
 function Footer({ setActiveHour, bestUntil }) {
+    console.log('Footer');
     const activePrice = useSelector((state) => state.main.activePrice);
     return (
         <>
