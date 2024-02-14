@@ -9,13 +9,15 @@ import ErrorModal from "./ErrorModal";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setActiveHour } from "./services/stateService";
+import { setErrorMessage } from "./services/stateService";
 
 function ElectricPrice() {
+  console.log('ElectricPrice');
+
   const params = useParams();
   const dispatch = useDispatch();
 
   const [showSideBar, setShowSideBar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [bestUntil, setBestUntil] = useState(0);
 
   const handleCloseSideBar = () => setShowSideBar(false);
@@ -31,11 +33,8 @@ function ElectricPrice() {
     <Container>
       <Head
         handleOpenSideBar={handleOpenSideBar}
-        setErrorMessage={setErrorMessage}
       />
       <Body
-
-        setErrorMessage={setErrorMessage}
         setBestUntil={setBestUntil}
       />
       <Footer
@@ -49,7 +48,6 @@ function ElectricPrice() {
       <ErrorModal
         show={!!errorMessage}
         handleClose={() => setErrorMessage(null)}
-        errorMessage={errorMessage}
       />
     </Container>
   );

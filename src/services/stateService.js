@@ -5,6 +5,7 @@ import { getDefaultFrom, getDefaultUntil } from "../utils/dates";
 const initialState = {
     activePrice: DEFAULT_ACTIVE_BUTTON,
     activeHour: 1,
+    errorMessage: null,
 };
 
 const initialDateState = {
@@ -14,6 +15,7 @@ const initialDateState = {
 
 export const setActivePrice = createAction('setActivePrice');
 export const setActiveHour = createAction('setActiveHour');
+export const setErrorMessage = createAction('setErrorMessage');
 
 const main = createReducer(initialState, (builder) => {
     builder.addCase(setActivePrice, (state, action) => {
@@ -21,6 +23,9 @@ const main = createReducer(initialState, (builder) => {
     })
         .addCase(setActiveHour, (state, action) => {
             state.activeHour = action.payload;
+        })
+        .addCase(setErrorMessage, (state, action) => {
+            state.errorMessage = action.payload;
         });
 });
 
