@@ -20,9 +20,13 @@ import { getLowPriceInterval } from "../utils/buildIntervals";
 import { getAveragePrice } from "../utils/maths";
 import lodash from "lodash";
 import { ERROR_MESSAGE } from "./constants";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setErrorMessage, setBestUntil } from "../services/stateService";
 
-function Body({ setErrorMessage, setBestUntil }) {
+function Body() {
+
+    const dispatch = useDispatch();
+
     const [priceData, setPriceData] = useState([]);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
@@ -56,8 +60,8 @@ function Body({ setErrorMessage, setBestUntil }) {
 
             setPriceData(priceData);
         })
-            .catch(error => setErrorMessage(ERROR_MESSAGE));
-    }, [from, until, setErrorMessage]);
+            .catch(error => dispatch(setErrorMessage(ERROR_MESSAGE)));
+    }, [from, until, dispatch]);
 
     useEffect(() => {
         const lowPriceIntervals = getLowPriceInterval(priceData, activeHour);
@@ -65,9 +69,9 @@ function Body({ setErrorMessage, setBestUntil }) {
         if (lowPriceIntervals.length) {
             setX1(lowPriceIntervals[0].position);
             setX2(lodash.last(lowPriceIntervals).position + 1);
-            setBestUntil(lowPriceIntervals[0].timestamp);
+            dispatch(setBestUntil(lowPriceIntervals[0].timestamp));
         }
-    }, [priceData, activeHour, setBestUntil]);
+    }, [priceData, activeHour, dispatch]);
 
     return (
         <Row>

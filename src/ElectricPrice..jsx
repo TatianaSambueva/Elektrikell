@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.scss";
 import Container from "react-bootstrap/Container";
 import Body from "./Body";
@@ -11,16 +11,9 @@ import { useDispatch } from "react-redux";
 import { setActiveHour } from "./services/stateService";
 
 function ElectricPrice() {
+
   const params = useParams();
   const dispatch = useDispatch();
-
-  const [showSideBar, setShowSideBar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [bestUntil, setBestUntil] = useState(0);
-
-  const handleCloseSideBar = () => setShowSideBar(false);
-  const handleOpenSideBar = () => setShowSideBar(true);
-
 
   useEffect(() => {
     if (params.hours) dispatch(setActiveHour(+params.hours));
@@ -29,28 +22,11 @@ function ElectricPrice() {
 
   return (
     <Container>
-      <Head
-        handleOpenSideBar={handleOpenSideBar}
-        setErrorMessage={setErrorMessage}
-      />
-      <Body
-
-        setErrorMessage={setErrorMessage}
-        setBestUntil={setBestUntil}
-      />
-      <Footer
-        bestUntil={bestUntil}
-      />
-      <LeftSideBar
-        show={showSideBar}
-        handleClose={handleCloseSideBar}
-
-      />
-      <ErrorModal
-        show={!!errorMessage}
-        handleClose={() => setErrorMessage(null)}
-        errorMessage={errorMessage}
-      />
+      <Head />
+      <Body />
+      <Footer />
+      <LeftSideBar />
+      <ErrorModal />
     </Container>
   );
 }
