@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
 function About() {
