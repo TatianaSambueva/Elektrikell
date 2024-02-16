@@ -9,6 +9,7 @@ import ErrorModal from "./ErrorModal";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setActiveHour } from "./services/stateService";
+import ElectricPriceProvider from "./contexts/ElectricPriceContext";
 
 function ElectricPrice() {
 
@@ -21,13 +22,15 @@ function ElectricPrice() {
 
 
   return (
-    <Container>
-      <Head />
-      <Body />
-      <Footer />
-      <LeftSideBar />
-      <ErrorModal />
-    </Container>
+    <ElectricPriceProvider>
+      <Container>
+        <Head />
+        <Body />
+        <Footer />
+        <LeftSideBar />
+        <ErrorModal />
+      </Container>
+    </ElectricPriceProvider>
   );
 }
 

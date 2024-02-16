@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {
@@ -22,23 +22,22 @@ import lodash from "lodash";
 import { ERROR_MESSAGE } from "./constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMessage, setBestUntil } from "../services/stateService";
+import { ElectricPriceContext } from "../contexts/ElectricPriceContext";
 
 function Body() {
 
     const dispatch = useDispatch();
-
     const [priceData, setPriceData] = useState([]);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
 
+    const { actions, values } = useContext(ElectricPriceContext);
+
     const activeHour = useSelector((state) => state.main.activeHour);
+
     const from = useSelector((state) => state.date.from);
     const until = useSelector((state) => state.date.until);
 
-
-    const averagePrice = useMemo(() => {
-        return getAveragePrice(priceData);
-    }, [priceData]);
 
     const renderDot = useCallback((line) => {
         const {
@@ -52,6 +51,8 @@ function Body() {
         ) : null;
     }, []);
 
+
+
     useEffect(() => {
         getPriceData(from, until).then(({ data, success }) => {
             if (!success) throw new Error();
@@ -59,9 +60,11 @@ function Body() {
             const priceData = chartDataConvertor(data.ee);
 
             setPriceData(priceData);
+
+            actions.setAveragePrice(getAveragePrice(priceData));
         })
             .catch(error => dispatch(setErrorMessage(ERROR_MESSAGE)));
-    }, [from, until, dispatch]);
+    }, [from, until, dispatch, actions]);
 
     useEffect(() => {
         const lowPriceIntervals = getLowPriceInterval(priceData, activeHour);
@@ -90,7 +93,7 @@ function Body() {
                         />
                         <ReferenceArea x1={x1} x2={x2} stroke="red" strokeOpacity={0.3} />
                         <ReferenceLine
-                            y={averagePrice}
+                            y={values.averagePrice}
                             label="Average price"
                             stroke="green"
                         />
