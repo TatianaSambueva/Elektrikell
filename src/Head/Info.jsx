@@ -20,7 +20,8 @@ function Info() {
     const [currentPrice, setCurrentPrice] = useState(0);
     const activePrice = useSelector((state) => state.main.activePrice);
 
-
+    const lowThreshold = 3;
+    const highThreshold = 9;
 
     useEffect(() => {
         (async () => {
@@ -42,8 +43,11 @@ function Info() {
         <>
             <Col>
                 <div>The current price of electricity is</div>
-                <Badge bg={BADGES[0].name}>{BADGES[0].id}</Badge>
+                {currentPrice <= lowThreshold && <Badge bg={BADGES[0].name}>{BADGES[0].id}</Badge>}
+                {currentPrice > lowThreshold && currentPrice <= highThreshold && <Badge bg={BADGES[2].name}>{BADGES[2].id}</Badge>}
+                {currentPrice > highThreshold && <Badge bg={BADGES[1].name}>{BADGES[1].id}</Badge>}
             </Col>
+
             <Col>
                 <ButtonGroup>
 
