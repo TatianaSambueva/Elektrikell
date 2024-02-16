@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActivePrice, setErrorMessage } from '../services/stateService';
 import { ElectricPriceContext } from "../contexts/ElectricPriceContext";
 
+
 function Info() {
     const dispatch = useDispatch();
 
@@ -20,8 +21,9 @@ function Info() {
     const [currentPrice, setCurrentPrice] = useState(0);
     const activePrice = useSelector((state) => state.main.activePrice);
 
-    const lowThreshold = 3;
-    const highThreshold = 9;
+    const averagePrice = values.averagePrice;
+    const lowThreshold = averagePrice * 0.6;
+    const highThreshold = averagePrice * 1.4;
 
     useEffect(() => {
         (async () => {
