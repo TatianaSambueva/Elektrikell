@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setErrorMessage, setBestUntil } from "../services/stateService";
 import { ElectricPriceContext } from "../contexts/ElectricPriceContext";
 
+
 function Body() {
 
     const dispatch = useDispatch();
